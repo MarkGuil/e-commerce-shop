@@ -2,9 +2,10 @@
 include('../../php/config.php');
 if (isset($_POST['save'])) {
   $category = trim($_POST['code']);
-
+  $_category = mysqli_real_escape_string($link,$category);
   $target_dir = "../../images/";
   $fname = strtotime(date('Y-m-d H:i')) . '_' . $_FILES["picture"]["name"];
+  $_fname = mysqli_real_escape_string($link,$fname);
   $target_file = $target_dir . basename($fname);
   $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -18,7 +19,7 @@ if (isset($_POST['save'])) {
     } else {
       if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
         $sql = "INSERT INTO category (`category_name`, `picture`)
-        VALUES ('$category', '$fname')";
+        VALUES ('$_category', '$_fname')";
         if (!mysqli_query($link, $sql)) {
           die('Error: ' . mysqli_error($link));
         } else {

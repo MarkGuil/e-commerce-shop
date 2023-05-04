@@ -1,22 +1,36 @@
 <?php
 include('../../php/config.php');
 if (isset($_POST['save'])) {
-  $prodID = $_REQUEST['ano'];
-  $prodName = $_POST['code'];
-  $category = $_POST['cat'];
-  $prodDesc = $_POST['name'];
-  $price = $_POST['price'];
-  if (isset($_POST['status'])) {
-    $status = $_POST['status'];
+  $prodID =  mysqli_real_escape_string($link,$_REQUEST['ano']);
+  $prodName =  mysqli_real_escape_string($link,$_POST['code']);
+  $category =  mysqli_real_escape_string($link,$_POST['cat']);
+  $prodDesc =  mysqli_real_escape_string($link,$_POST['name']);
+  $quantity =  mysqli_real_escape_string($link,$_POST['quantity']);
+  $price =  mysqli_real_escape_string($link,$_POST['price']);
+  $location = "location: ../products.php";
+  if (isset($_POST['status']) && $_POST['status'] == "featured") {
+    $status =  mysqli_real_escape_string($link,$_POST['status']);
+    $location = "location: ../featured_products.php";
   } else {
     $status = "";
+    $location = "location: ../products.php";
   }
-  $voucher = $_POST['voucher'];
-  $voucherval = $_POST['voucherval'];
+  $voucher = mysqli_real_escape_string($link,$_POST['voucher']);
+  $voucherval =  mysqli_real_escape_string($link,$_POST['voucherval']);
+
   $target_dir = "../../images/";
   $fname = strtotime(date('Y-m-d H:i')) . '_' . $_FILES["picture"]["name"];
+  $_fname = mysqli_real_escape_string($link,$fname);
   $target_file = $target_dir . basename($fname);
   $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+  if (empty($_FILES['picture']['name'])) {
+    $sql = "UPDATE `product` SET `productName` = '$prodName', `category_id` = '$category', `productDescription` = '$prodDesc', `status` = '$status', `price` = '$price', `availableQuantity` = '$quantity', `voucher` = '$voucher', `vouchervalue` = '$voucherval' WHERE productID= '$prodID'";
+    if (!mysqli_query($link, $sql)) {
+      die('Error: ' . mysqli_error($link));
+    }
+    header($location);
+  }
 
   // Allow certain file size
   if ($_FILES["picture"]["size"] > 500000) {
@@ -27,11 +41,11 @@ if (isset($_POST['save'])) {
       echo "<script> alert('Sorry, only JPG, JPEG, & PNG files are allowed.') </script>";
     } else {
       if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
-        $sql = "UPDATE product SET `productName` = '$prodName', `category_id` = '$category', `productDescription` = '$prodDesc', `picture` = '$fname', `status` = '$status', `price` = '$price', `voucher` = '$voucher', `vouchervalue` = '$voucherval' WHERE productID= '$prodID'";
+        $sql = "UPDATE `product` SET `productName` = '$prodName', `category_id` = '$category', `productDescription` = '$prodDesc', `picture` = '$_fname', `status` = '$status', `price` = '$price', `voucher` = '$voucher', `vouchervalue` = '$voucherval' WHERE productID= '$prodID'";
         if (!mysqli_query($link, $sql)) {
           die('Error: ' . mysqli_error($link));
         }
-        header("location: ../products.php");
+        header($location);
       } else {
         echo "<script> alert('Sorry, there was an error uploading your file.') </script>";
       }

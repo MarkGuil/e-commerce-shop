@@ -3,7 +3,7 @@ session_start();
 include('config.php');
 if(isset($_POST['updatePassword'])){
     $customerID = $_SESSION["customerID"];
-    $password = trim($_POST['newPass3']);
+    $password = mysqli_real_escape_string($link,trim($_POST['newPass3']));
 
 
     // $sql1 =mysqli_query($link, "SELECT * FROM customer WHERE username='$username'");

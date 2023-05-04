@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (isset($_POST['login'])) {
-    $username = $_REQUEST['username'];
-    $password = $_REQUEST['password'];
+    $username = mysqli_real_escape_string($link,$_REQEUST['username']);
+    $password = mysqli_real_escape_string($link,$_REQEUST['password']);
     extract($_POST);
     include 'config.php';
     $sql = mysqli_query($link, "SELECT * FROM user where username='$username' and `password`='$password'");

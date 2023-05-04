@@ -1,27 +1,30 @@
-<?php
-include('../../php/config.php');
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    $sql = mysqli_query($link, "SELECT * FROM category WHERE category_id = '$id'");
-    while ($row = mysqli_fetch_assoc($sql)) {
-        $catName = $row['category_name'];
-?>
-        <form action="php/updatecategory.php" method="post" enctype="multipart/form-data">
-            <center>
-                <h4><i class="icon-plus-sign icon-large"></i> Edit Category</h4>
-            </center>
-            <hr>
-            <div id="ac">
-                <input type="hidden" value="<?php echo $id; ?>" name="ano" />
-                <span>Category Name : </span><input type="text" style="width:230px; height:30px;" name="code" value="<?php echo $catName; ?>" Required><br>
-                <hr>
-                <span>Picture : </span><input type="file" name="picture" id="picture" style="margin-top:1%;" required><br><br>
-                <div style="float:right; margin-right:10px;">
-                    <button class="btn btn-success btn-block btn-large" style="width:267px;" name="save">Save</button>
-                </div>
+<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </form>
-
-<?php }
-}
-?>
+            <form action="php/updatecategory.php" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" value="" name="ano" id="editID" required />
+                    <div class="alert alert-warning" role="alert">
+                        If you don't want to change the image, please leave the picture empty.
+                    </div>
+                    <div class="mb-3">
+                        <label>Category Name: </label>
+                        <input type="text" class="form-control" name="code" id="editCode" Required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Image: </label>
+                        <input type="file" class="editPicture form-control" name="picture" id="picture">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-success btn-block btn-large" name="save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

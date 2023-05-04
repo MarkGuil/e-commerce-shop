@@ -1,30 +1,47 @@
-<?php
-include('../../php/config.php');
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    $sql = mysqli_query($link, "SELECT * FROM customer WHERE customerID = '$id'");
-    while ($row = mysqli_fetch_assoc($sql)) {
-        $cusName = $row['name'];
-?>
-        <form action="php/updatecustomer.php" method="post" enctype="multipart/form-data">
-            <center>
-                <h4><i class="icon-plus-sign icon-large"></i> Edit Customer Details</h4>
-            </center>
-            <hr>
-            <div id="ac">
-                <input type="hidden" value="<?php echo $id; ?>" name="ano" />
-                <span>Customer Name : </span><input type="text" value="<?php echo $cusName; ?>" style="width:230px; height:30px;" name="code" Required><br>
-                <span>Username : </span><input type="text" value="<?php echo $row['username']; ?>" style="width:230px; height:30px; margin-left:10.8%; margin-top:1%;" name="username" Required><br>
-                <span>Phone Number : </span><input type="text" value="<?php echo $row['phone']; ?>" style="width:230px; height:30px; margin-left:2%; margin-top:1%;" placeholder="(e.g. 09XX-XXX-XXXX)" maxlength="11" pattern="^(09|\+639)\d{9}$" name="number" Required><br>
-                <span>Email : </span><input type="email" value="<?php echo $row['email']; ?>" placeholder="(e.g. websystech21@gmail.com)" style="width:230px; height:30px; margin-left:18%; margin-top:1%;" name="email" Required><br>
-                <span>Password : </span><input type="password" value="<?php echo $row['password']; ?>" minlength="8" style="width:230px; height:30px; margin-left:11.5%; margin-top:1%;" name="password" Required><br>
-                <span>Address : </span><input type="text" value="<?php echo $row['address']; ?>" style="width:230px; height:30px; margin-left:14%; margin-top:1%;" name="address" Required><br>
-                <span>Postal Code : </span><input type="number" value="<?php echo $row['postalCode']; ?>" style="width:230px; height:30px; margin-left:7%; margin-top:1%;" name="postal" Required><br>
-                <hr>
-                <div style="text-align:center">
-                    <button class="btn btn-success btn-block btn-large" style="width:267px;" name="save">Save</button>
-                </div>
-            </div>
-        </form>
-<?php }
-} ?>
+<div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Customer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="php/updatecustomer.php" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+            <input type="hidden" value="" name="ano" id="customerID" />
+          <div class="mb-3">
+            <label>Customer Name: </label>
+            <input type="text" class="form-control" name="code" id="customername" Required>
+          </div>
+          <div class="mb-3">
+            <label>Username: </label>
+            <input type="text" class="form-control" name="username" id="username" Required>
+          </div>
+          <div class="mb-3">
+            <label>Phone Number: </label>
+            <input type="text" class="form-control" maxlength="11" pattern="^(09|\+639)\d{9}$" name="number" id="number" Required>
+          </div>
+          <div class="mb-3">
+            <label>Email: </label>
+            <input type="email" class="form-control" name="email" id="email" Required>
+          </div>
+          <div class="mb-3">
+            <label>Password: </label>
+            <input type="password" class="form-control" minlength="3" name="password" id="password" Required>
+          </div>
+          <div class="mb-3">
+            <label>Address: </label>
+            <input type="text" class="form-control" name="address" id="address" Required>
+          </div>
+          <div class="mb-3">
+            <label>Postal Code: </label>
+            <input type="text" class="form-control" name="postal" id="postal" maxlength="4" pattern="\d{4}" Required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-success btn-block btn-large" name="save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

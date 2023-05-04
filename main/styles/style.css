@@ -1,0 +1,115 @@
+  .sidenav {
+    background-color: rgb(29, 194, 216);
+  }
+
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    display: block;
+  }
+
+  .sidenav a:hover {
+    color: black;
+    background: white;
+    transition: all .2s ease-in-out;
+  }
+
+  .active {
+    background-color: rgb(22, 156, 173);
+  }
+
+  .main {
+    padding: 0px 10px;
+    margin-top: 10px;
+  }
+
+  #dashboard-links > div > a:hover {
+    color: white;
+    background: rgba(var(--bs-secondary-rgb),var(--bs-border-opacity))!important;
+    transition: all .2s ease-in-out;
+  }
+
+  #example2 {
+    padding: 5px 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 10px 40px rgb(29, 194, 216) inset;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #btns {
+    margin: 3% 13% 0% 13%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+
+    .sidenav a {
+      font-size: 12px;
+    }
+  }
+  
+  #resultTable {
+    border-collapse: separate;
+    background-color: #FFFFFF;
+    border-spacing: 0;
+    max-width: 100%;
+  }
+
+  #resultTable {
+    color: #666666;
+    text-shadow: 0 1px 0 #FFFFFF;
+    width: 100%;
+    border: 1px solid #999999;
+    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.3);
+    margin-top: 13px;
+  }
+
+  #resultTable thead tr th {
+    background: none repeat scroll 0 0 #EEEEEE;
+    color: #222222;
+    padding: 10px 14px;
+    text-align: left;
+    border-top: 0 none;
+    font-size: 13px;
+  }
+
+  #resultTable tbody tr td {
+    font: bold 13px 'Arial';
+
+    text-align: left;
+    padding: 10px 14px;
+    border-top: 1px solid #999999;
+  }
+
+  #resultTable td {
+    padding: 7px;
+    border: #4e95f4 1px solid;
+  }
+
+  #resultTable tr {
+    background: #fff;
+  }
+
+  #resultTable tr:hover {
+    background-color: #ffff99;
+  }
+
+  #refresh:hover {
+    background: skyblue;
+  }

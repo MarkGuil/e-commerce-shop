@@ -1,7 +1,7 @@
 <?php
 include('../../php/config.php');
 if (isset($_POST['save'])) {
-    $statName = trim($_POST['code']);
+    $statName = mysqli_real_escape_string($link,trim($_POST['code']));
 
     $sql = "INSERT INTO prodstatus (`statusName`)
     VALUES ('$statName')";
