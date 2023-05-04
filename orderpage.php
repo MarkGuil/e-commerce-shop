@@ -22,11 +22,15 @@ if (isset($_SESSION["customerID"])) {
   $ctgry = "category.php?id=";
 }
 
+if (isset($_SESSION["customerID"])) {
 $customerID = $_SESSION["customerID"];
 
-if ($customerID > 0) {
-  $sql2 = mysqli_query($link, "SELECT * FROM customer where customerID='$customerID'");
-  $row2  = mysqli_fetch_array($sql2);
+  if ($customerID > 0) {
+    $sql2 = mysqli_query($link, "SELECT * FROM customer where customerID='$customerID'");
+    $row2  = mysqli_fetch_array($sql2);
+  } else {
+    header("Location: login.php");
+  }
 } else {
   header("Location: login.php");
 }

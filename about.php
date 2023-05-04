@@ -1,6 +1,6 @@
 <?php
 include 'php/config.php';
-include 'php/loginProcess.php';
+session_start();
 if (isset($_SESSION["customerID"])) {
     $ID = $_SESSION["customerID"];
     if ($ID > 0) {

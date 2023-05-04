@@ -1,6 +1,6 @@
 <?php
 include '../php/config.php';
-include '../php/adminprocess.php';
+session_start();
 if (isset($_SESSION["userID"])) {
     $ID = $_SESSION["userID"];
     if ($ID > 0) {
