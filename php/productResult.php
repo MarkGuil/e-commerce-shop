@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-include 'loginProcess.php';
+session_start();
 $re = "";
 if (isset($_POST["anoNa"])) {
     $productResult = "";

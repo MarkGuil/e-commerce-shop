@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+session_start();
 
 if (isset($_POST['save'])) {
     $name = mysqli_real_escape_string($link,trim($_REQUEST['name']));
